@@ -77,14 +77,14 @@ RCT_EXPORT_METHOD(setGenericPasswordForService:(NSString*)service withUsername:(
   }
 
   // Create dictionary of search parameters
-  NSDictionary* dict = [NSDictionary dictionaryWithObjectsAndKeys:(__bridge id)(kSecClassGenericPassword),  kSecClass, service, kSecAttrService, kCFBooleanTrue, kSecReturnAttributes, nil];
+  NSDictionary* dict = [NSDictionary dictionaryWithObjectsAndKeys:(__bridge id)(kSecClassGenericPassword),  kSecClass, service, kSecAttrService, kCFBooleanTrue, kSecReturnAttributes, kSecAttrAccessibleAfterFirstUnlock, kSecAttrAccessible, nil];
 
   // Remove any old values from the keychain
   OSStatus osStatus = SecItemDelete((__bridge CFDictionaryRef) dict);
 
   // Create dictionary of parameters to add
   NSData* passwordData = [password dataUsingEncoding:NSUTF8StringEncoding];
-  dict = [NSDictionary dictionaryWithObjectsAndKeys:(__bridge id)(kSecClassGenericPassword), kSecClass, service, kSecAttrService, passwordData, kSecValueData, username, kSecAttrAccount, nil];
+  dict = [NSDictionary dictionaryWithObjectsAndKeys:(__bridge id)(kSecClassGenericPassword), kSecClass, service, kSecAttrService, passwordData, kSecValueData, username, kSecAttrAccount, kSecAttrAccessibleAfterFirstUnlock, kSecAttrAccessible, nil];
 
   // Try to save to keychain
   osStatus = SecItemAdd((__bridge CFDictionaryRef) dict, NULL);
@@ -104,7 +104,7 @@ RCT_EXPORT_METHOD(getGenericPasswordForService:(NSString*)service callback:(RCTR
   }
 
   // Create dictionary of search parameters
-  NSDictionary* dict = [NSDictionary dictionaryWithObjectsAndKeys:(__bridge id)(kSecClassGenericPassword), kSecClass, service, kSecAttrService, kCFBooleanTrue, kSecReturnAttributes, kCFBooleanTrue, kSecReturnData, nil];
+  NSDictionary* dict = [NSDictionary dictionaryWithObjectsAndKeys:(__bridge id)(kSecClassGenericPassword), kSecClass, service, kSecAttrService, kCFBooleanTrue, kSecReturnAttributes, kCFBooleanTrue, kSecReturnData, kSecAttrAccessibleAfterFirstUnlock, kSecAttrAccessible, nil];
 
   // Look up server in the keychain
   NSDictionary* found = nil;
@@ -135,7 +135,7 @@ RCT_EXPORT_METHOD(resetGenericPasswordForService:(NSString*)service callback:(RC
   }
 
   // Create dictionary of search parameters
-  NSDictionary* dict = [NSDictionary dictionaryWithObjectsAndKeys:(__bridge id)(kSecClassGenericPassword), kSecClass, service, kSecAttrService, kCFBooleanTrue, kSecReturnAttributes, kCFBooleanTrue, kSecReturnData, nil];
+  NSDictionary* dict = [NSDictionary dictionaryWithObjectsAndKeys:(__bridge id)(kSecClassGenericPassword), kSecClass, service, kSecAttrService, kCFBooleanTrue, kSecReturnAttributes, kCFBooleanTrue, kSecReturnData, kSecAttrAccessibleAfterFirstUnlock, kSecAttrAccessible, nil];
 
   // Remove any old values from the keychain
   OSStatus osStatus = SecItemDelete((__bridge CFDictionaryRef) dict);
@@ -150,14 +150,14 @@ RCT_EXPORT_METHOD(resetGenericPasswordForService:(NSString*)service callback:(RC
 
 RCT_EXPORT_METHOD(setInternetCredentialsForServer:(NSString*)server withUsername:(NSString*)username withPassword:(NSString*)password callback:(RCTResponseSenderBlock)callback){
   // Create dictionary of search parameters
-  NSDictionary* dict = [NSDictionary dictionaryWithObjectsAndKeys:(__bridge id)(kSecClassInternetPassword),  kSecClass, server, kSecAttrServer, kCFBooleanTrue, kSecReturnAttributes, nil];
+  NSDictionary* dict = [NSDictionary dictionaryWithObjectsAndKeys:(__bridge id)(kSecClassInternetPassword),  kSecClass, server, kSecAttrServer, kCFBooleanTrue, kSecReturnAttributes, kSecAttrAccessibleAfterFirstUnlock, kSecAttrAccessible, nil];
 
   // Remove any old values from the keychain
   OSStatus osStatus = SecItemDelete((__bridge CFDictionaryRef) dict);
 
   // Create dictionary of parameters to add
   NSData* passwordData = [password dataUsingEncoding:NSUTF8StringEncoding];
-  dict = [NSDictionary dictionaryWithObjectsAndKeys:(__bridge id)(kSecClassInternetPassword), kSecClass, server, kSecAttrServer, passwordData, kSecValueData, username, kSecAttrAccount, nil];
+  dict = [NSDictionary dictionaryWithObjectsAndKeys:(__bridge id)(kSecClassInternetPassword), kSecClass, server, kSecAttrServer, passwordData, kSecValueData, username, kSecAttrAccount, kSecAttrAccessibleAfterFirstUnlock, kSecAttrAccessible, nil];
 
   // Try to save to keychain
   osStatus = SecItemAdd((__bridge CFDictionaryRef) dict, NULL);
@@ -174,7 +174,7 @@ RCT_EXPORT_METHOD(setInternetCredentialsForServer:(NSString*)server withUsername
 RCT_EXPORT_METHOD(getInternetCredentialsForServer:(NSString*)server callback:(RCTResponseSenderBlock)callback){
 
   // Create dictionary of search parameters
-  NSDictionary* dict = [NSDictionary dictionaryWithObjectsAndKeys:(__bridge id)(kSecClassInternetPassword), kSecClass, server, kSecAttrServer, kCFBooleanTrue, kSecReturnAttributes, kCFBooleanTrue, kSecReturnData, nil];
+  NSDictionary* dict = [NSDictionary dictionaryWithObjectsAndKeys:(__bridge id)(kSecClassInternetPassword), kSecClass, server, kSecAttrServer, kCFBooleanTrue, kSecReturnAttributes, kCFBooleanTrue, kSecReturnData, kSecAttrAccessibleAfterFirstUnlock, kSecAttrAccessible, nil];
 
   // Look up server in the keychain
   NSDictionary* found = nil;
@@ -202,7 +202,7 @@ RCT_EXPORT_METHOD(getInternetCredentialsForServer:(NSString*)server callback:(RC
 RCT_EXPORT_METHOD(resetInternetCredentialsForServer:(NSString*)server callback:(RCTResponseSenderBlock)callback){
 
   // Create dictionary of search parameters
-  NSDictionary* dict = [NSDictionary dictionaryWithObjectsAndKeys:(__bridge id)(kSecClassInternetPassword), kSecClass, server, kSecAttrServer, kCFBooleanTrue, kSecReturnAttributes, kCFBooleanTrue, kSecReturnData, nil];
+  NSDictionary* dict = [NSDictionary dictionaryWithObjectsAndKeys:(__bridge id)(kSecClassInternetPassword), kSecClass, server, kSecAttrServer, kCFBooleanTrue, kSecReturnAttributes, kCFBooleanTrue, kSecReturnData, kSecAttrAccessibleAfterFirstUnlock, kSecAttrAccessible, nil];
 
   // Remove any old values from the keychain
   OSStatus osStatus = SecItemDelete((__bridge CFDictionaryRef) dict);
